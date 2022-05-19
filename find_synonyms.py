@@ -1,13 +1,20 @@
-import nltk, os, json
+import nltk, os, json, ssl
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+nltk.download('wordnet')
 from tqdm import tqdm
 from nltk.corpus import wordnet as wn
 
 def find_synonyms(word):
-	synonyms = []
+	synonyms = [word]
 	for syn in wn.synsets(word):
 		for l in syn.lemmas():
 			if "_" not in l.name():
-				synonyms.append(l.name())
+				synonyms.append(l.name().lower())
 
 	return synonyms
 
