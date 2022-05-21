@@ -25,7 +25,7 @@ def main():
 		for w in syns:
 			if w in stops or w in personal_stops:
 				continue
-			if w not in curr_syn_freq.keys():
+			if w not in curr_syn_freq.keys(): 
 				curr_syn_freq[w] = 1
 			else:
 				curr_syn_freq[w] += 1
