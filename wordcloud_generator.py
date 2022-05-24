@@ -16,7 +16,7 @@ def main():
 	total_words = 0
 	stops = stopwords.words('english')
 	personal_stops = ["take", "make", "give", "break", "hold", "see", "run", "bear", "head", "draw", "call", "get"]
-	for fp in tqdm(os.listdir("books_synonym_encoded")):
+	for i, fp in tqdm(enumerate(os.listdir("books_synonym_encoded"))):
 		curr_syn_freq = {}
 		with open(f"books_synonym_encoded/{fp}", "r") as json_read:
 			syns = json.load(json_read)
@@ -46,7 +46,7 @@ def main():
 
 		plt.imshow(wc, interpolation = "bilinear")
 
-		plt.savefig(f"wordclouds/{fp.split('.')[0]}.png", format = "png")
+		plt.savefig(f"wordclouds/book_{i}.png", format = "png")
 
 	for w in all_syn_freq.keys():
 			all_syn_freq[w] = float(all_syn_freq[w]) / float(total_words)
